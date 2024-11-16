@@ -1,0 +1,97 @@
+/* RegisterPage Styles */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7fc;
+}
+
+.register-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 50%;
+  padding: 10px;
+  background: linear-gradient(135deg, #007BFF, #00A7FF);
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.site-name {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007BFF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-field {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button {
+  padding: 14px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.secondary-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f4f7fc;
+  border: none;
+  color: #007BFF;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.secondary-btn:hover {
+  color: white;
+}

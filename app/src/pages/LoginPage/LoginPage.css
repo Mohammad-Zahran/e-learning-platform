@@ -17,13 +17,41 @@
     text-align: center;
   }
   
+  .logo-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 80px;  /* Increase size */
+    height: auto;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease-in-out;  
+    border-radius: 50%;  
+    padding: 10px;  /* Add some padding around the logo */
+    background: linear-gradient(135deg, #007BFF, #00A7FF);  
+  }
+  
+  .logo:hover {
+    transform: scale(1.1);  /* Slight zoom effect on hover */
+  }
+  
+  .site-name {
+    font-size: 28px;  
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  
   form {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
   
-  input {
+  .input-field {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -32,7 +60,7 @@
     box-sizing: border-box;
   }
   
-  input:focus {
+  .input-field:focus {
     border-color: #007BFF;
     outline: none;
   }
@@ -69,6 +97,6 @@
   }
   
   .secondary-btn:hover {
-    color: #0056b3;
+    color: white;
   }
   
