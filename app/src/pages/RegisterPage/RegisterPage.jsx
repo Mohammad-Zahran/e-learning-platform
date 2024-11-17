@@ -2,20 +2,34 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './RegisterPage.css';
 import logo from './../../assets/logo.svg';
+import axios from 'axios';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      // Proceed with registration logic (e.g., API call)
-      console.log("User registered");
-    } else {
-      alert("Passwords do not match!");
+
+    try {
+      const response = await axios.post('http://localhost/e-learning/server/register.php', {
+        name,
+        email,
+        password,
+      });
+
+      if (response.data.status === 'success') {
+        console.log("User registered successfully:", response.data.message);
+        navigate('/');
+      } else {
+        setErrorMessage(response.data.message);
+      }
+    } catch (error) {
+      setErrorMessage("Something went wrong. Please try again.");
+      console.error("Error during registration:", error);
     }
   };
 
@@ -50,6 +64,8 @@ const RegisterPage = () => {
             value={password}
             required
           />
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <button type="submit">
             Register
