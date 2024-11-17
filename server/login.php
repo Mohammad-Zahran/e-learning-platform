@@ -8,7 +8,7 @@ include 'connection.php';
 
 use Firebase\JWT\JWT;
 
-$key = base64_encode(random_bytes(32));
+$key = "mohammad"; 
 $error = '';
 
 if (empty($_POST["email"])) {

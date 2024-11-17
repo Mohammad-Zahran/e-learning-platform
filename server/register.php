@@ -2,7 +2,12 @@
 require_once 'connection.php'; 
 require_once 'vendor/autoload.php'; 
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 header("Content-Type: application/json");
+
+$secret_key = "mohammad";
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -10,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $data['name'] ?? '';
     $email = $data['email'] ?? '';
     $password = $data['password'] ?? '';
+
+    // Validate input
+    if (empty($name) || empty($email) || empty($password)) {
+        echo json_encode(["status" => "error", "message" => "All fields are required"]);
+        exit();
+    }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(["status" => "error", "message" => "Invalid email format"]);
@@ -21,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // This will check if the email is taken or not
+    // Check if the email already exists
     $stmt = $connection->prepare("SELECT id FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -32,13 +43,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Insert the new user
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     $stmt = $connection->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'student')");
     $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
     if ($stmt->execute()) {
-        echo json_encode(["status" => "success", "message" => "User registered successfully"]);
+        // Generate JWT token
+        $user_id = $stmt->insert_id;
+        $payload = [
+            "id" => $user_id,
+            "email" => $email,
+            "role" => "student",
+            "iat" => time(),
+            "exp" => time() + (60 * 60) 
+        ];
+
+        $jwt = JWT::encode($payload, $secret_key, 'HS256');
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "User registered successfully",
+            "token" => $jwt
+        ]);
     } else {
         echo json_encode(["status" => "error", "message" => "Registration failed"]);
     }
