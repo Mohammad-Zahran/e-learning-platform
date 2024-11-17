@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $data['email'] ?? '';
     $password = $data['password'] ?? '';
 
-    // Validate input
     if (empty($name) || empty($email) || empty($password)) {
         echo json_encode(["status" => "error", "message" => "All fields are required"]);
         exit();
