@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // The strlen will get the string length and I added a condition if the string length is less then 6 the error will be occured
     if (strlen($password) < 6) {
         echo json_encode(["status" => "error", "message" => "Password must be at least 6 characters"]);
         exit();
