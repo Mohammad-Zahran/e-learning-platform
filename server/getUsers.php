@@ -1,7 +1,10 @@
 <?php
-
 include "connection.php";
 require 'vendor/autoload.php';
+
+
+// Get all headers
+$headers = getallheaders();
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -9,8 +12,6 @@ use Firebase\JWT\Key;
 $key = "mohammad";
 $error = '';
 
-// Get all headers
-$headers = getallheaders();
 
 // Check if the Authorization header exists
 if (isset($headers['Authorization'])) {
@@ -21,6 +22,7 @@ if (isset($headers['Authorization'])) {
         // Decode the JWT token
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
 
+        // Prepare and execute query to get users
         $query = $connection->prepare("SELECT * FROM users");
         $query->execute();
         $result = $query->get_result();
