@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AdminNav from '../../components/AdminNav/AdminNav';
+import './AdminStudents.css'; // Import custom styles
 
 const AdminStudents = () => {
   const [students, setStudents] = useState([]);
@@ -10,7 +12,7 @@ const AdminStudents = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get('http://localhost/e-learning/server/getUsers.php', {
+        const response = await axios.get('http://localhost/e-learning/server/getStudents.php', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
@@ -50,13 +52,14 @@ const AdminStudents = () => {
   };
 
   // Display loading or error messages
-  if (loading) return <div>Loading students...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="loading">Loading students...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
     <div>
-      <h2>Manage Students</h2>
-      <table>
+        <AdminNav />
+      <h2 className="page-title">Manage Students</h2>
+      <table className="students-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -72,7 +75,10 @@ const AdminStudents = () => {
               <td>{student.email}</td>
               <td>{student.is_banned ? 'Banned' : 'Active'}</td>
               <td>
-                <button onClick={() => handleBanUnban(student.id, student.is_banned)}>
+                <button
+                  className={`action-btn ${student.is_banned ? 'unban-btn' : 'ban-btn'}`}
+                  onClick={() => handleBanUnban(student.id, student.is_banned)}
+                >
                   {student.is_banned ? 'Unban' : 'Ban'}
                 </button>
               </td>
