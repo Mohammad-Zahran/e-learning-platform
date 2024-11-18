@@ -1,0 +1,59 @@
+.student-page {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .student-sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #343a40;
+  }
+  
+  .student-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .student-sidebar ul li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #495057;
+  }
+  
+  .student-sidebar ul li:hover {
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  .student-sidebar ul li.active {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  
+  .student-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .student-content h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #343a40;
+  }
+  
+  .student-content p {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+  
