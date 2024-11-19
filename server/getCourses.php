@@ -15,10 +15,8 @@ if (isset($headers['Authorization'])) {
     $token = str_replace('Bearer ', '', $headers['Authorization']);
 
     try {
-        // Decode the JWT token
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
 
-        // Prepare and execute query to get users where role is 'student'
         $query = $connection->prepare("SELECT * FROM courses");
         $query->execute();
         $result = $query->get_result();
