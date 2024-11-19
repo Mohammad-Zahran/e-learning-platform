@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AdminNav from '../../components/AdminNav/AdminNav';
+import '../../styles/AdminCourses.css'; // Assuming you'll create a CSS file for styling.
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const fetchCourses = async () => {
     try {
@@ -53,7 +57,7 @@ const AdminCourses = () => {
           },
         }
       );
-      fetchCourses(); 
+      fetchCourses();
     } catch (err) {
       setError('Failed to delete the course.');
     }
@@ -71,7 +75,7 @@ const AdminCourses = () => {
         }
       );
       alert('Instructor assigned successfully.');
-      fetchCourses(); 
+      fetchCourses();
     } catch (err) {
       setError('Failed to assign instructor.');
     }
@@ -86,9 +90,15 @@ const AdminCourses = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Admin Courses</h1>
-      <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <div className="admin-courses-container">
+      <AdminNav />
+      <div className="header-section">
+        <h1>Admin Courses</h1>
+        <button className="create-course-btn" onClick={() => navigate('/create-course')}>
+          Create Course
+        </button>
+      </div>
+      <table className="courses-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -118,9 +128,7 @@ const AdminCourses = () => {
               </td>
               <td>
                 <select
-                  onChange={(e) =>
-                    assignInstructor(course.id, e.target.value)
-                  }
+                  onChange={(e) => assignInstructor(course.id, e.target.value)}
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -143,7 +151,9 @@ const AdminCourses = () => {
                 </select>
               </td>
               <td>
-                <button onClick={() => deleteCourse(course.id)}>Delete</button>
+                <button className="delete-btn" onClick={() => deleteCourse(course.id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

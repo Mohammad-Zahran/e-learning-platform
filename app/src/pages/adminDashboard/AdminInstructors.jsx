@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminNav from '../../components/AdminNav/AdminNav';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import '../../styles/AdminStudents.css';
 
 const AdminInstructors = () => {
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchInstructors = async () => {
@@ -60,10 +61,8 @@ const AdminInstructors = () => {
             <h2 className="page-title">Manage Instructors</h2>
             <table className="students-table">
 
-                <button className="create-btn">
-                    <Link to="/create-instructors" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        Create Instructor
-                    </Link>
+                <button className="create-btn" onClick={() => navigate('/create-instructor')}>
+                    Create Course
                 </button>
                 <thead>
                     <tr>
