@@ -17,7 +17,7 @@ if (isset($headers['Authorization'])) {
 
         if ($decoded->role !== 'admin') {
             http_response_code(403);
-            echo json_encode(["status" => "error", "message" => "You do not have permission to delete a course."]);
+            echo json_encode(["status" => "error", "message" => "You do not have permission to update a course."]);
             exit();
         }
 
@@ -29,22 +29,30 @@ if (isset($headers['Authorization'])) {
             exit();
         }
 
-        $course_id = $data['course_id'];
+        if (!isset($data['name']) || empty($data['name'])) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Course name is required."]);
+            exit();
+        }
 
-        $stmt = $connection->prepare("DELETE FROM courses WHERE id = ?");
-        $stmt->bind_param("i", $course_id);
+        $course_id = $data['course_id'];
+        $name = $data['name'];
+        $description = isset($data['description']) ? $data['description'] : ''; 
+
+        $stmt = $connection->prepare("UPDATE courses SET name = ?, description = ? WHERE id = ?");
+        $stmt->bind_param("ssi", $name, $description, $course_id);
 
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
                 http_response_code(200);
-                echo json_encode(["status" => "success", "message" => "Course deleted successfully."]);
+                echo json_encode(["status" => "success", "message" => "Course updated successfully."]);
             } else {
                 http_response_code(404);
-                echo json_encode(["status" => "error", "message" => "Course not found."]);
+                echo json_encode(["status" => "error", "message" => "Course not found or no changes were made."]);
             }
         } else {
             http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "Failed to delete the course."]);
+            echo json_encode(["status" => "error", "message" => "Failed to update the course."]);
         }
 
         $stmt->close();
