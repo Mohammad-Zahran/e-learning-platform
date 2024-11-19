@@ -1,7 +1,17 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-import "../../styles/AdminNav.css"
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../../styles/AdminNav.css';
+
 const AdminNav = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Remove the token from local storage
+    localStorage.removeItem('token');
+    // Redirect to the login page
+    navigate('/');
+  };
+
   return (
     <nav className="navbar">
       <h1>Admin Panel</h1>
@@ -10,9 +20,10 @@ const AdminNav = () => {
         <li><Link to="/admin-students">Manage Students</Link></li>
         <li><Link to="/admin-instructors">Manage Instructors</Link></li>
         <li><Link to="/admin-courses">Manage Courses</Link></li>
+        <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default AdminNav
+export default AdminNav;
