@@ -7,7 +7,6 @@ use Firebase\JWT\Key;
 
 $key = "mohammad";
 
-// Get all headers
 $headers = getallheaders();
 
 if (isset($headers['Authorization'])) {
@@ -39,14 +38,14 @@ if (isset($headers['Authorization'])) {
         $course_id = $data['course_id'];
         $instructor_id = $data['instructor_id'];
 
-        $stmt = $connection->prepare("SELECT * FROM users WHERE id = ? AND role = 'instructor'");
-        $stmt->bind_param("i", $instructor_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $checkStmt = $connection->prepare("SELECT * FROM course_instructors WHERE course_id = ? AND instructor_id = ?");
+        $checkStmt->bind_param("ii", $course_id, $instructor_id);
+        $checkStmt->execute();
+        $result = $checkStmt->get_result();
 
-        if ($result->num_rows == 0) {
-            http_response_code(404);
-            echo json_encode(["status" => "error", "message" => "Instructor not found or invalid role."]);
+        if ($result->num_rows > 0) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Course is already assigned to this instructor."]);
             exit();
         }
 
@@ -62,6 +61,7 @@ if (isset($headers['Authorization'])) {
         }
 
         $stmt->close();
+        $checkStmt->close();
     } catch (Exception $e) {
         http_response_code(401);
         echo json_encode(["status" => "error", "message" => "Invalid or expired token."]);

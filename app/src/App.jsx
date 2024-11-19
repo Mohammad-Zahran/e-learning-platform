@@ -9,6 +9,7 @@ import AdminPage from './pages/adminDashboard/AdminPage';
 import AdminStudents from './pages/adminDashboard/AdminStudents';
 import AdminInstructors from './pages/adminDashboard/AdminInstructors';
 import CreateInstructors from './pages/adminDashboard/CreateInstructors';
+import AdminCourses from './pages/adminDashboard/AdminCourses';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <Route path='/admin-students' element={<AdminStudents />}/>
       <Route path='/admin-instructors' element={<AdminInstructors />}/>
       <Route path='/create-instructors' element={<CreateInstructors />}/>
+      <Route path='/admin-courses' element={<AdminCourses />}/>
       <Route path='/*' element={<h1>Not Found</h1>}/>
     </Routes>
     </BrowserRouter>
