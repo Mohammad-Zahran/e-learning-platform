@@ -54,3 +54,36 @@
     background-color: #e53935;
   }
   
+  .edit-btn {
+    background-color: #2196f3; 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .edit-btn:hover {
+    background-color: #1976d2; 
+  }
+
+  .save-btn {
+    background-color: #2196f3; 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .save-btn:hover {
+    background-color: #1976d2; 
+  }
+  
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }

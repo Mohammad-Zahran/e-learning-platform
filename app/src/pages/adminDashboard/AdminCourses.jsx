@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdminNav from '../../components/AdminNav/AdminNav';
-import '../../styles/AdminCourses.css'; // Assuming you'll create a CSS file for styling.
+import '../../styles/AdminCourses.css'; 
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [editingCourse, setEditingCourse] = useState(null); 
+  const [updatedName, setUpdatedName] = useState('');
+  const [updatedDescription, setUpdatedDescription] = useState('');
   const navigate = useNavigate();
 
   const fetchCourses = async () => {
@@ -81,6 +84,25 @@ const AdminCourses = () => {
     }
   };
 
+  const updateCourse = async (courseId) => {
+    try {
+      await axios.post(
+        'http://localhost/e-learning/server/updateCourse.php',
+        { course_id: courseId, name: updatedName, description: updatedDescription },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      alert('Course updated successfully.');
+      setEditingCourse(null); 
+      fetchCourses(); 
+    } catch (err) {
+      setError('Failed to update the course.');
+    }
+  };
+
   useEffect(() => {
     fetchCourses();
     fetchInstructors();
@@ -113,8 +135,27 @@ const AdminCourses = () => {
           {courses.map((course) => (
             <tr key={course.id}>
               <td>{course.id}</td>
-              <td>{course.name}</td>
-              <td>{course.description}</td>
+              <td>
+                {editingCourse === course.id ? (
+                  <input
+                    type="text"
+                    value={updatedName}
+                    onChange={(e) => setUpdatedName(e.target.value)}
+                  />
+                ) : (
+                  course.name
+                )}
+              </td>
+              <td>
+                {editingCourse === course.id ? (
+                  <textarea
+                    value={updatedDescription}
+                    onChange={(e) => setUpdatedDescription(e.target.value)}
+                  />
+                ) : (
+                  course.description
+                )}
+              </td>
               <td>
                 {course.assignedInstructors?.length > 0 ? (
                   <ul>
@@ -151,9 +192,34 @@ const AdminCourses = () => {
                 </select>
               </td>
               <td>
-                <button className="delete-btn" onClick={() => deleteCourse(course.id)}>
+                <div className='buttons'>
+                {editingCourse === course.id ? (
+                  <button
+                    className="save-btn"
+                    onClick={() => updateCourse(course.id)}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                  className="edit-btn"
+                  onClick={() => {
+                    setEditingCourse(course.id);
+                    setUpdatedName(course.name);
+                    setUpdatedDescription(course.description);
+                  }}
+                >
+                  Edit
+                </button>
+                
+                )}
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteCourse(course.id)}
+                >
                   Delete
                 </button>
+                </div>
               </td>
             </tr>
           ))}
