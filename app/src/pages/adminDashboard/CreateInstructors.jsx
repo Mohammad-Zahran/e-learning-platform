@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CreateInstructors.css'; // Optional for styling
+import '../../styles/CreateInstructors.css'; // Optional for styling
 import AdminNav from '../../components/AdminNav/AdminNav';
 
 const CreateInstructors = () => {

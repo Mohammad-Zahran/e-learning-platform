@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminNav from '../../components/AdminNav/AdminNav';
 import { Link } from "react-router-dom";
-import './AdminStudents.css';
+import '../../styles/AdminStudents.css';
 
 const AdminInstructors = () => {
     const [instructors, setInstructors] = useState([]);

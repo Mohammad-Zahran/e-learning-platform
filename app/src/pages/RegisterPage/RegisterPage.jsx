@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import './RegisterPage.css';
+import '../../styles/RegisterPage.css';
 import logo from './../../assets/logo.svg';
 import axios from 'axios';
 

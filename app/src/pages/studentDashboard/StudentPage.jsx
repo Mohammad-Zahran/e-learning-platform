@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './StudentPage.css';
+import '../../styles/StudentPage.css';
 
 const StudentPage = () => {
   const [activeItem, setActiveItem] = useState('My Courses');

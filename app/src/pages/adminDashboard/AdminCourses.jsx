@@ -7,7 +7,6 @@ const AdminCourses = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Fetch courses with assigned instructors
   const fetchCourses = async () => {
     try {
       setLoading(true);
@@ -27,7 +26,6 @@ const AdminCourses = () => {
     }
   };
 
-  // Fetch all instructors
   const fetchInstructors = async () => {
     try {
       const response = await axios.get(
@@ -44,7 +42,6 @@ const AdminCourses = () => {
     }
   };
 
-  // Delete a course
   const deleteCourse = async (courseId) => {
     try {
       await axios.post(
@@ -56,13 +53,12 @@ const AdminCourses = () => {
           },
         }
       );
-      fetchCourses(); // Refresh courses after deletion
+      fetchCourses(); 
     } catch (err) {
       setError('Failed to delete the course.');
     }
   };
 
-  // Assign an instructor to a course
   const assignInstructor = async (courseId, instructorId) => {
     try {
       await axios.post(

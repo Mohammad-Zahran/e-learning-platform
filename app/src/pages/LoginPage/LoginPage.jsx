@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import './LoginPage.css';
+import '../../styles/LoginPage.css';
 import logo from './../../assets/logo.svg';  
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminNav from '../../components/AdminNav/AdminNav';
-import './AdminStudents.css'; // Import custom styles
+import '../../styles/AdminStudents.css'; // Import custom styles
 
 const AdminStudents = () => {
   const [students, setStudents] = useState([]);
