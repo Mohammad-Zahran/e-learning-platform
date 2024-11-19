@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminNav from '../../components/AdminNav/AdminNav';
-import './AdminStudents.css'; // Import custom styles
+import './AdminStudents.css';
 
-const AdminStudents = () => {
-  const [students, setStudents] = useState([]);
+const AdminInstructors = () => {
+  const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch all students
   useEffect(() => {
-    const fetchStudents = async () => {
+    const fetchInstructors = async () => {
       try {
-        const response = await axios.get('http://localhost/e-learning/server/getStudents.php', {
+        const response = await axios.get('http://localhost/e-learning/server/getInstructors.php', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setStudents(response.data);
+        setInstructors(response.data);
         setLoading(false);
       } catch (err) {
-        setError('Error fetching students');
+        setError('Error fetching instructors');
         setLoading(false);
       }
     };
-    fetchStudents();
+    fetchInstructors();
   }, []);
 
   const handleBanUnban = async (id, isBanned) => {
-    const newStatus = isBanned ? 0 : 1; // Toggle ban status
-
+    const newStatus = isBanned ? 0 : 1;
     try {
       await axios.post(
         'http://localhost/e-learning/server/banUsers.php',
@@ -41,9 +39,9 @@ const AdminStudents = () => {
         }
       );
 
-      setStudents((prevStudents) =>
-        prevStudents.map((student) =>
-          student.id === id ? { ...student, is_banned: newStatus } : student
+      setInstructors((prevInstructors) =>
+        prevInstructors.map((instructor) =>
+          instructor.id === id ? { ...instructor, is_banned: newStatus } : instructor
         )
       );
     } catch (err) {
@@ -52,14 +50,19 @@ const AdminStudents = () => {
   };
 
   // Display loading or error messages
-  if (loading) return <div className="loading">Loading students...</div>;
+  if (loading) return <div className="loading">Loading instructors...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
     <div>
-        <AdminNav />
-      <h2 className="page-title">Manage Students</h2>
+      <AdminNav />
+      <h2 className="page-title">Manage Instructors</h2>
+
+      
+
       <table className="students-table">
+        {/* Simple "Create Instructor" Button */}
+      <button className="create-btn">Create Instructor</button>
         <thead>
           <tr>
             <th>Name</th>
@@ -69,17 +72,17 @@ const AdminStudents = () => {
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.email}</td>
-              <td>{student.is_banned ? 'Banned' : 'Active'}</td>
+          {instructors.map((instructor) => (
+            <tr key={instructor.id}>
+              <td>{instructor.name}</td>
+              <td>{instructor.email}</td>
+              <td>{instructor.is_banned ? 'Banned' : 'Active'}</td>
               <td>
                 <button
-                  className={`action-btn ${student.is_banned ? 'unban-btn' : 'ban-btn'}`}
-                  onClick={() => handleBanUnban(student.id, student.is_banned)}
+                  className={`action-btn ${instructor.is_banned ? 'unban-btn' : 'ban-btn'}`}
+                  onClick={() => handleBanUnban(instructor.id, instructor.is_banned)}
                 >
-                  {student.is_banned ? 'Unban' : 'Ban'}
+                  {instructor.is_banned ? 'Unban' : 'Ban'}
                 </button>
               </td>
             </tr>
@@ -90,4 +93,4 @@ const AdminStudents = () => {
   );
 };
 
-export default AdminStudents;
+export default AdminInstructors;
