@@ -23,8 +23,8 @@ if (isset($headers['Authorization'])) {
             "students" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'student'")->fetch_assoc()['count'],
             "instructors" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'instructor'")->fetch_assoc()['count'],
             "courses" => $connection->query("SELECT COUNT(*) AS count FROM courses")->fetch_assoc()['count'],
-            "bannedStudents" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'student' AND status = 'banned'")->fetch_assoc()['count'],
-            "bannedInstructors" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'instructor' AND status = 'banned'")->fetch_assoc()['count'],
+            "bannedStudents" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'student' AND is_banned = 1")->fetch_assoc()['count'],
+            "bannedInstructors" => $connection->query("SELECT COUNT(*) AS count FROM users WHERE role = 'instructor' AND is_banned = 1")->fetch_assoc()['count'],
         ];
 
         echo json_encode($stats);
