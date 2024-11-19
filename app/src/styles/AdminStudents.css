@@ -93,3 +93,10 @@
     background-color: #45a049;
   }
   
+  .no-data {
+    text-align: center;
+    font-size: 18px;
+    color: #6c757d;
+    margin-top: 20px;
+  }
+  

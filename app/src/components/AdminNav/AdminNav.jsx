@@ -6,9 +6,7 @@ const AdminNav = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Remove the token from local storage
     localStorage.removeItem('token');
-    // Redirect to the login page
     navigate('/');
   };
 

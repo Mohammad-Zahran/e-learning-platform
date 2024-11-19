@@ -28,7 +28,7 @@ const AdminStudents = () => {
   }, []);
 
   const handleBanUnban = async (id, isBanned) => {
-    const newStatus = isBanned ? 0 : 1; // Toggle ban status
+    const newStatus = isBanned ? 0 : 1; 
 
     try {
       await axios.post(
@@ -51,7 +51,6 @@ const AdminStudents = () => {
     }
   };
 
-  // Display loading or error messages
   if (loading) return <div className="loading">Loading students...</div>;
   if (error) return <div className="error">{error}</div>;
 

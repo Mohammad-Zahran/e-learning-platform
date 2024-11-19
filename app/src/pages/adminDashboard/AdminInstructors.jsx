@@ -18,7 +18,7 @@ const AdminInstructors = () => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     },
                 });
-                setInstructors(response.data);
+                setInstructors(response.data); 
                 setLoading(false);
             } catch (err) {
                 setError('Error fetching instructors');
@@ -51,7 +51,6 @@ const AdminInstructors = () => {
         }
     };
 
-    // Display loading or error messages
     if (loading) return <div className="loading">Loading instructors...</div>;
     if (error) return <div className="error">{error}</div>;
 
@@ -59,11 +58,10 @@ const AdminInstructors = () => {
         <div>
             <AdminNav />
             <h2 className="page-title">Manage Instructors</h2>
+            <button className="create-btn" onClick={() => navigate('/create-instructor')}>
+                Create Instructor
+            </button>
             <table className="students-table">
-
-                <button className="create-btn" onClick={() => navigate('/create-instructor')}>
-                    Create Course
-                </button>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -73,21 +71,27 @@ const AdminInstructors = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {instructors.map((instructor) => (
-                        <tr key={instructor.id}>
-                            <td>{instructor.name}</td>
-                            <td>{instructor.email}</td>
-                            <td>{instructor.is_banned ? 'Banned' : 'Active'}</td>
-                            <td>
-                                <button
-                                    className={`action-btn ${instructor.is_banned ? 'unban-btn' : 'ban-btn'}`}
-                                    onClick={() => handleBanUnban(instructor.id, instructor.is_banned)}
-                                >
-                                    {instructor.is_banned ? 'Unban' : 'Ban'}
-                                </button>
-                            </td>
+                    {instructors.length > 0 ? (
+                        instructors.map((instructor) => (
+                            <tr key={instructor.id}>
+                                <td>{instructor.name}</td>
+                                <td>{instructor.email}</td>
+                                <td>{instructor.is_banned ? 'Banned' : 'Active'}</td>
+                                <td>
+                                    <button
+                                        className={`action-btn ${instructor.is_banned ? 'unban-btn' : 'ban-btn'}`}
+                                        onClick={() => handleBanUnban(instructor.id, instructor.is_banned)}
+                                    >
+                                        {instructor.is_banned ? 'Unban' : 'Ban'}
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4" className="no-data">No instructors available</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>

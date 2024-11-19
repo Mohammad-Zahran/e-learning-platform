@@ -29,9 +29,10 @@ if (isset($headers['Authorization'])) {
             http_response_code(200);
             echo json_encode($array);
         } else {
-            http_response_code(404); 
-            echo json_encode(["message" => "No instructors found"]);
+            http_response_code(200); 
+            echo json_encode([]);
         }
+        
     } catch (Exception $e) {
         http_response_code(401); 
         echo json_encode(["error" => "Unauthorized: Invalid token"]);
