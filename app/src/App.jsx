@@ -11,6 +11,7 @@ import AdminInstructors from './pages/adminDashboard/AdminInstructors';
 import CreateInstructors from './pages/adminDashboard/CreateInstructors';
 import AdminCourses from './pages/adminDashboard/AdminCourses';
 import CreateCourses from './pages/adminDashboard/CreateCourses';
+import InstructorPage from './pages/instructorDashboard/InstructorPage';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
       <Route path='/create-instructor' element={<CreateInstructors />}/>
       <Route path='/admin-courses' element={<AdminCourses />}/>
       <Route path='/create-course' element={<CreateCourses />}/>
+      <Route path='/instructor' element={<InstructorPage />}/>
       <Route path='/*' element={<h1>Not Found</h1>}/>
     </Routes>
     </BrowserRouter>
