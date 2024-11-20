@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; 
 import axios from 'axios';
+import { MdAssignment } from 'react-icons/md'; 
 import "../../styles/ClassworkPage.css";
 
 const ClassworkPage = () => {
   const [assignments, setAssignments] = useState([]);
   const [error, setError] = useState('');
-  const [openAssignment, setOpenAssignment] = useState(null); 
-  
+  const [openAssignment, setOpenAssignment] = useState(null);
+
   const { courseId } = useParams();
 
   useEffect(() => {
@@ -46,8 +47,11 @@ const ClassworkPage = () => {
             onClick={() => handleAssignmentClick(assignment.id)}
           >
             <div className="assignment-header">
+              <div className='title'>
+              <MdAssignment className="assignment-icon" />
               <h4 className="assignment-title">{assignment.title}</h4>
-              <span className="due-date">Due Date{new Date(assignment.due_date).toLocaleDateString()}</span>
+              </div>
+              <span className="due-date">{new Date(assignment.due_date).toLocaleDateString()}</span>
             </div>
             <div 
               className={`assignment-description ${openAssignment === assignment.id ? 'open' : ''}`}

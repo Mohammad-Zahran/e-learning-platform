@@ -78,6 +78,20 @@
     color: #777;
     margin-top: 20px;
   }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+  }
+
+  .assignment-icon {
+    font-size: 40px;  
+    color: #007bff;   
+  }
+  
   
   @media (max-width: 768px) {
     .classwork-page {

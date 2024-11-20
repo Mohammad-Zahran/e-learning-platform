@@ -10,7 +10,7 @@ import '../../styles/CourseClassroom.css';
 const CourseClassroom = () => {
   const { courseId } = useParams();
   const [courseDetails, setCourseDetails] = useState(null);
-  const [activeTab, setActiveTab] = useState('stream'); // Default tab is 'stream'
+  const [activeTab, setActiveTab] = useState('stream'); 
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -40,10 +40,8 @@ const CourseClassroom = () => {
         <p>{courseDetails.description}</p>
       </header>
       
-      {/* Use CourseNav component */}
       <CourseNav activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      {/* Conditionally render components based on active tab */}
       <main className="classroom-content">
         {activeTab === 'stream' && <StreamPage />}
         {activeTab === 'classwork' && <ClassworkPage />}
