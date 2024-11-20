@@ -137,6 +137,14 @@
   margin-top: 20px;
 }
 
+.create-assignment-btn{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 40px;
+  border-radius: 50px;
+  gap: 5px;
+}
+
 @media (max-width: 768px) {
   .classwork-page {
     padding: 15px;

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdAssignment } from 'react-icons/md';
 import { CiMenuKebab } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa";
 import "../../styles/ClassworkPage.css";
 
 const ClassworkPage = () => {
@@ -66,6 +67,10 @@ const ClassworkPage = () => {
     }
   };
 
+  const handleCreateAssignment = () => {
+    navigate(`/create-assignment/${courseId}`);
+  };
+
   const handleClickOutside = (event) => {
     if (!event.target.closest('.menu') && !event.target.closest('.kebab-icon')) {
       setShowMenu(null);
@@ -83,6 +88,9 @@ const ClassworkPage = () => {
   return (
     <div className="classwork-page">
       <h3>Assignments</h3>
+      <button className="create-assignment-btn" onClick={handleCreateAssignment}>
+      <FaPlus /> Create
+      </button>
       <ul className="assignments-list">
         {assignments.map((assignment) => (
           <li
