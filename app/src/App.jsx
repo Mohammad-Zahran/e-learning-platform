@@ -13,6 +13,7 @@ import AdminCourses from './pages/adminDashboard/AdminCourses';
 import CreateCourses from './pages/adminDashboard/CreateCourses';
 import InstructorPage from './pages/instructorDashboard/InstructorPage';
 import CourseClassroom from './pages/instructorDashboard/CourseClassroom';
+import ClassworkPage from './pages/instructorDashboard/ClassworkPage';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       <Route path='/create-course' element={<CreateCourses />}/>
       <Route path='/instructor' element={<InstructorPage />}/>
       <Route path="/course/:courseId" element={<CourseClassroom />} />
+      <Route path="/course/:courseId" element={<ClassworkPage />} />
       <Route path='/*' element={<h1>Not Found</h1>}/>
     </Routes>
     </BrowserRouter>

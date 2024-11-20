@@ -4,8 +4,8 @@ import '../styles/CourseNav.css';
 
 const CourseNav = ({ activeTab, setActiveTab }) => {
   const handleTabChange = (e, tab) => {
-    e.preventDefault();  // Prevent default anchor tag behavior
-    setActiveTab(tab);    // Set the active tab
+    e.preventDefault();  
+    setActiveTab(tab);    
   };
 
   return (
@@ -18,7 +18,7 @@ const CourseNav = ({ activeTab, setActiveTab }) => {
         Stream
       </Link>
       <Link
-        to="#"
+        to="/course/:courseId"
         className={activeTab === 'classwork' ? 'active' : ''}
         onClick={(e) => handleTabChange(e, 'classwork')}
       >
