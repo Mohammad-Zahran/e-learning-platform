@@ -1,0 +1,41 @@
+.edit-assignment-page {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .edit-assignment-page form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-assignment-page form div {
+    margin-bottom: 15px;
+  }
+  
+  .edit-assignment-page form label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .edit-assignment-page form input,
+  .edit-assignment-page form textarea {
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  .edit-assignment-page form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-assignment-page form button:hover {
+    background-color: #45a049;
+  }
+  
