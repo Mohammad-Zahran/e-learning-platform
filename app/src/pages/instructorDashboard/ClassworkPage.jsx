@@ -45,15 +45,24 @@ const ClassworkPage = () => {
   };
 
   const handleDeleteAssignment = async (id) => {
-    try {
-      await axios.delete(`http://localhost/e-learning/server/deleteAssignment.php?assignment_id=${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      setAssignments(assignments.filter(assignment => assignment.id !== id));
-    } catch (err) {
-      console.error("Failed to delete assignment:", err);
+    if (window.confirm("Are you sure you want to delete this assignment?")) {
+      try {
+        const response = await axios.delete(`http://localhost/e-learning/server/deleteAssignment.php`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          data: {
+            assignment_id: id,
+          },
+        });
+
+        if (response.status === 200) {
+          setAssignments(assignments.filter(assignment => assignment.id !== id));
+        }
+      } catch (err) {
+        console.error("Failed to delete assignment:", err);
+        setError('Failed to delete assignment');
+      }
     }
   };
 
