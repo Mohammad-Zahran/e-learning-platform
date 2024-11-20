@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../../styles/InstructorPage.css';
 
 const InstructorPage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -29,12 +31,20 @@ const InstructorPage = () => {
   if (loading) return <div className="loading">Loading courses...</div>;
   if (error) return <div className="error">{error}</div>;
 
+  const handleCourseClick = (courseId) => {
+    navigate(`/course/${courseId}`);
+  };
+
   return (
     <div className="instructor-page">
       <h2>Your Courses</h2>
       <div className="courses-container">
         {courses.map((course) => (
-          <div key={course.id} className="course-card">
+          <div
+            key={course.id}
+            className="course-card"
+            onClick={() => handleCourseClick(course.id)} // Navigate on click
+          >
             <h3>{course.name}</h3>
             <p>{course.description}</p>
             <div className="course-dates">
