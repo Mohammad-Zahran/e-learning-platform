@@ -1,27 +1,36 @@
 import React from 'react';
-import '.././styles/CourseNav.css'
+import { Link } from 'react-router-dom';
+import '../styles/CourseNav.css';
 
 const CourseNav = ({ activeTab, setActiveTab }) => {
+  const handleTabChange = (e, tab) => {
+    e.preventDefault();  // Prevent default anchor tag behavior
+    setActiveTab(tab);    // Set the active tab
+  };
+
   return (
     <nav className="classroom-nav">
-      <button
+      <Link
+        to="#"
         className={activeTab === 'stream' ? 'active' : ''}
-        onClick={() => setActiveTab('stream')}
+        onClick={(e) => handleTabChange(e, 'stream')}
       >
         Stream
-      </button>
-      <button
+      </Link>
+      <Link
+        to="#"
         className={activeTab === 'classwork' ? 'active' : ''}
-        onClick={() => setActiveTab('classwork')}
+        onClick={(e) => handleTabChange(e, 'classwork')}
       >
         Classwork
-      </button>
-      <button
+      </Link>
+      <Link
+        to="#"
         className={activeTab === 'people' ? 'active' : ''}
-        onClick={() => setActiveTab('people')}
+        onClick={(e) => handleTabChange(e, 'people')}
       >
         People
-      </button>
+      </Link>
     </nav>
   );
 };

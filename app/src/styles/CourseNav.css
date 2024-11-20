@@ -24,3 +24,26 @@
     border-bottom: 3px solid #007bff;
   }
   
+.classroom-nav a {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;  
+    transition: all 0.3s ease;
+  }
+  
+  .classroom-nav a:hover {
+    color: #007bff;
+  }
+  
+  .classroom-nav a.active {
+    color: #007bff;
+    border-bottom: 3px solid #007bff;
+  }
+  
+.classroom-nav a:visited {
+    color: inherit; 
+  }

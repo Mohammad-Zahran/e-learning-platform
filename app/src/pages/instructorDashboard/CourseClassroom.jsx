@@ -1,8 +1,10 @@
-// CourseClassroom.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import CourseNav from '../../components/CourseNav'; 
+import StreamPage from './StreamPage'; 
+import ClassworkPage from './ClassworkPage'; 
+import PeoplePage from './PeoplePage';
 import '../../styles/CourseClassroom.css';
 
 const CourseClassroom = () => {
@@ -28,19 +30,6 @@ const CourseClassroom = () => {
     fetchCourseDetails();
   }, [courseId]);
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'stream':
-        return <div className="tab-content">Stream content goes here...</div>;
-      case 'classwork':
-        return <div className="tab-content">Classwork content goes here...</div>;
-      case 'people':
-        return <div className="tab-content">People content goes here...</div>;
-      default:
-        return null;
-    }
-  };
-
   if (error) return <div className="error">{error}</div>;
   if (!courseDetails) return <div>Loading course details...</div>;
 
@@ -54,7 +43,12 @@ const CourseClassroom = () => {
       {/* Use CourseNav component */}
       <CourseNav activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="classroom-content">{renderTabContent()}</main>
+      {/* Conditionally render components based on active tab */}
+      <main className="classroom-content">
+        {activeTab === 'stream' && <StreamPage />}
+        {activeTab === 'classwork' && <ClassworkPage />}
+        {activeTab === 'people' && <PeoplePage />}
+      </main>
     </div>
   );
 };
