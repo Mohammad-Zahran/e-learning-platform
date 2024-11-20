@@ -1,0 +1,69 @@
+.instructor-navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #0056b3;
+    font-family: Arial, sans-serif;
+    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.1);
+    height: 100vh; 
+    width: 250px; 
+  }
+  
+  .instructor-navbar .brand {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .instructor-navbar .brand:hover {
+    color: #d4f0d7;
+  }
+  
+  .instructor-navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .instructor-navbar ul li {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .instructor-navbar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+  }
+  
+  .instructor-navbar a:hover {
+    background-color: #4c9fff;
+    color: white;
+  }
+  
+  .instructor-navbar .logout-btn {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .instructor-navbar .logout-btn:hover {
+    background-color: #d4f0d7;
+    color: #0056b3;
+    border-color: #d4f0d7;
+  }
+  
