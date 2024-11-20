@@ -23,32 +23,6 @@
     margin-top: 10px;
   }
   
-  .classroom-nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .classroom-nav button {
-    padding: 10px 20px;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .classroom-nav button:hover {
-    color: #007bff;
-  }
-  
-  .classroom-nav button.active {
-    color: #007bff;
-    border-bottom: 3px solid #007bff;
-  }
-  
   .classroom-content {
     text-align: center;
   }

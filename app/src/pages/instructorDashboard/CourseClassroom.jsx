@@ -1,11 +1,14 @@
+// CourseClassroom.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import CourseNav from '../../components/CourseNav'; 
 import '../../styles/CourseClassroom.css';
+
 const CourseClassroom = () => {
   const { courseId } = useParams();
   const [courseDetails, setCourseDetails] = useState(null);
-  const [activeTab, setActiveTab] = useState('stream'); 
+  const [activeTab, setActiveTab] = useState('stream'); // Default tab is 'stream'
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -47,26 +50,10 @@ const CourseClassroom = () => {
         <h2>{courseDetails.name}</h2>
         <p>{courseDetails.description}</p>
       </header>
-      <nav className="classroom-nav">
-        <button
-          className={activeTab === 'stream' ? 'active' : ''}
-          onClick={() => setActiveTab('stream')}
-        >
-          Stream
-        </button>
-        <button
-          className={activeTab === 'classwork' ? 'active' : ''}
-          onClick={() => setActiveTab('classwork')}
-        >
-          Classwork
-        </button>
-        <button
-          className={activeTab === 'people' ? 'active' : ''}
-          onClick={() => setActiveTab('people')}
-        >
-          People
-        </button>
-      </nav>
+      
+      {/* Use CourseNav component */}
+      <CourseNav activeTab={activeTab} setActiveTab={setActiveTab} />
+      
       <main className="classroom-content">{renderTabContent()}</main>
     </div>
   );
