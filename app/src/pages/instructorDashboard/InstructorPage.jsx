@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axios from 'axios';
 import '../../styles/InstructorPage.css';
 
 const InstructorPage = () => {
@@ -28,12 +28,12 @@ const InstructorPage = () => {
     fetchCourses();
   }, []);
 
+  const handleCourseClick = (courseId) => {
+    navigate(`/course/${courseId}`); // Navigate to the course page
+  };
+
   if (loading) return <div className="loading">Loading courses...</div>;
   if (error) return <div className="error">{error}</div>;
-
-  const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`);
-  };
 
   return (
     <div className="instructor-page">
@@ -43,7 +43,7 @@ const InstructorPage = () => {
           <div
             key={course.id}
             className="course-card"
-            onClick={() => handleCourseClick(course.id)} // Navigate on click
+            onClick={() => handleCourseClick(course.id)} // Handle click event
           >
             <h3>{course.name}</h3>
             <p>{course.description}</p>
