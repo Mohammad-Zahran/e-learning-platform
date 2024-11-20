@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; 
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { MdAssignment } from 'react-icons/md'; 
+import { MdAssignment } from 'react-icons/md';
+import { CiMenuKebab } from "react-icons/ci";
 import "../../styles/ClassworkPage.css";
 
 const ClassworkPage = () => {
   const [assignments, setAssignments] = useState([]);
   const [error, setError] = useState('');
   const [openAssignment, setOpenAssignment] = useState(null);
+  const [showMenu, setShowMenu] = useState(null);
 
   const { courseId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -19,7 +22,7 @@ const ClassworkPage = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setAssignments(response.data); 
+        setAssignments(response.data);
       } catch (err) {
         setError('Failed to fetch assignments');
         console.error(err);
@@ -30,8 +33,40 @@ const ClassworkPage = () => {
   }, [courseId]);
 
   const handleAssignmentClick = (id) => {
-    setOpenAssignment(openAssignment === id ? null : id); 
+    setOpenAssignment(openAssignment === id ? null : id);
   };
+
+  const handleMenuToggle = (id) => {
+    setShowMenu(showMenu === id ? null : id);
+  };
+
+  const handleEditAssignment = (id) => {
+    navigate(`/edit-assignment/${id}`);
+  };
+
+  const handleDeleteAssignment = async (id) => {
+    try {
+      await axios.delete(`http://localhost/e-learning/server/deleteAssignment.php?assignment_id=${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      setAssignments(assignments.filter(assignment => assignment.id !== id));
+    } catch (err) {
+      console.error("Failed to delete assignment:", err);
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    if (!event.target.closest('.menu') && !event.target.closest('.kebab-icon')) {
+      setShowMenu(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (error) return <div className="error">{error}</div>;
   if (!assignments.length) return <div className="no-assignments">No assignments available.</div>;
@@ -41,19 +76,37 @@ const ClassworkPage = () => {
       <h3>Assignments</h3>
       <ul className="assignments-list">
         {assignments.map((assignment) => (
-          <li 
-            key={assignment.id} 
-            className="assignment-item" 
+          <li
+            key={assignment.id}
+            className="assignment-item"
             onClick={() => handleAssignmentClick(assignment.id)}
           >
             <div className="assignment-header">
-              <div className='title'>
-              <MdAssignment className="assignment-icon" />
-              <h4 className="assignment-title">{assignment.title}</h4>
+              <div className="title">
+                <MdAssignment className="assignment-icon" />
+                <h4 className="assignment-title">{assignment.title}</h4>
               </div>
-              <span className="due-date">{new Date(assignment.due_date).toLocaleDateString()}</span>
+              <div className="header-right">
+                <span className="due-date">{new Date(assignment.due_date).toLocaleDateString()}</span>
+                <div className="kebab-container">
+                  <CiMenuKebab
+                    className="kebab-icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMenuToggle(assignment.id);
+                    }}
+                  />
+                  {showMenu === assignment.id && (
+                    <div className="menu">
+                      <button onClick={() => handleEditAssignment(assignment.id)}>Edit</button>
+                      <button onClick={() => handleDeleteAssignment(assignment.id)}>Delete</button>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-            <div 
+
+            <div
               className={`assignment-description ${openAssignment === assignment.id ? 'open' : ''}`}
             >
               <p>{assignment.description}</p>

@@ -1,109 +1,152 @@
 .classwork-page {
-    padding: 20px;
-    background-color: #f4f7fb;
-    min-height: 100vh;
+  padding: 20px;
+  background-color: #f4f7fb;
+  min-height: 100vh;
+}
+
+.classwork-page h3 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.assignment-item {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.assignment-item:hover {
+  background-color: #f9f9f9;
+}
+
+.assignment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.assignment-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.assignment-icon {
+  font-size: 40px;
+  color: #007bff;
+  margin-right: 10px; 
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.due-date {
+  font-size: 16px;
+  color: #777;
+  white-space: nowrap; 
+}
+
+.kebab-container {
+  position: relative; 
+  display: inline-block;
+}
+
+.kebab-icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.menu {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  background: gray;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 40;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menu button:hover {
+  background-color: #f0f0f0;
+}
+
+.assignment-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  font-size: 16px;
+  color: #555;
+}
+
+.assignment-description.open {
+  max-height: 200px; 
+  padding: 10px 0;
+}
+
+.assignment-description p {
+  margin: 0;
+}
+
+.error {
+  color: red;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.no-assignments {
+  font-size: 18px;
+  color: #777;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .classwork-page {
+    padding: 15px;
   }
-  
-  .classwork-page h3 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .assignments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
+
   .assignment-item {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .assignment-item:hover {
-    background-color: #f9f9f9;
-  }
-  
-  .assignment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .assignment-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .due-date {
-    font-size: 16px;
-    color: #777;
-  }
-  
-  .assignment-description {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .assignment-description.open {
-    max-height: 200px; 
-    padding: 10px 0;
-  }
-  
-  .assignment-description p {
-    margin: 0;
-  }
-  
-  .error {
-    color: red;
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
-  .no-assignments {
-    font-size: 18px;
-    color: #777;
-    margin-top: 20px;
+    padding: 15px;
   }
 
-  .title {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-
+  .assignments-list {
+    gap: 15px;
   }
-
-  .assignment-icon {
-    font-size: 40px;  
-    color: #007bff;   
-  }
-  
-  
-  @media (max-width: 768px) {
-    .classwork-page {
-      padding: 15px;
-    }
-  
-    .assignment-item {
-      padding: 15px;
-    }
-  
-    .assignments-list {
-      gap: 15px;
-    }
-  }
-  
+}
