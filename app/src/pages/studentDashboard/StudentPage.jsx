@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/StudentPage.css';
+import "../../styles/StudentPage.css"
 
 const StudentPage = () => {
   const [courses, setCourses] = useState([]);
@@ -33,7 +33,8 @@ const StudentPage = () => {
   }, []);
 
   const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`);
+    // Navigating to the course classroom (stream page) for a student
+    navigate(`/student/course/${courseId}/classroom`);
   };
 
   const handleEnroll = async (courseId, event) => {
@@ -60,8 +61,6 @@ const StudentPage = () => {
       alert(err.response?.data?.message || 'Failed to enroll in the course');
     }
   };
-  
-  
 
   if (loading) return <div className="loading">Loading courses...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -77,7 +76,7 @@ const StudentPage = () => {
             <div
               key={course.id}
               className="course-card"
-              onClick={() => handleCourseClick(course.id)}
+              onClick={() => handleCourseClick(course.id, 'stream')}
             >
               <h3>{course.name}</h3>
               <p>{course.description}</p>
