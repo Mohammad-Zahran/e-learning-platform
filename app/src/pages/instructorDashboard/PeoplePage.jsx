@@ -35,10 +35,32 @@ const PeoplePage = () => {
         .catch((err) => {
           setError(err.response ? err.response.data.message : 'Error contacting the server.');
         });
+
+      axios
+        .post('http://localhost/e-learning/server/getAcceptedStudents.php', 
+          { course_id: courseId }, 
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.status === 'success') {
+            setStudents(response.data.students);
+          } else {
+            setError(response.data.message || 'An error occurred while fetching students.');
+          }
+        })
+        .catch((err) => {
+          setError(err.response ? err.response.data.message : 'Error contacting the server.');
+        });
     } else {
       setError('Authorization token or course ID missing');
     }
   }, [courseId]);
+
+
 
   const handleInvite = () => {
     const token = localStorage.getItem('token');
@@ -60,7 +82,7 @@ const PeoplePage = () => {
       .then((response) => {
         if (response.data.status === 'success') {
           alert('Invitation sent successfully!');
-          setInviteEmail(''); // Clear the input field after sending the invitation
+          setInviteEmail(''); 
         } else {
           setError(response.data.message || 'An error occurred while sending the invitation.');
         }
