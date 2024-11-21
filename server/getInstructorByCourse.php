@@ -29,7 +29,6 @@ if (isset($headers['Authorization'])) {
 
         $course_id = $_GET['course_id'];
 
-        // Fetch instructor for the course
         $stmt = $connection->prepare("
             SELECT i.id, i.name, i.email
             FROM users i
