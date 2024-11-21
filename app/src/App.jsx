@@ -16,6 +16,7 @@ import CourseClassroom from './pages/instructorDashboard/CourseClassroom';
 import ClassworkPage from './pages/instructorDashboard/ClassworkPage';
 import EditAssignmentPage from './pages/instructorDashboard/editAssignment';
 import CreateAssignment from './pages/instructorDashboard/CreateAssignment';
+import PeoplePage from './pages/instructorDashboard/PeoplePage';
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
       <Route path="/course/:courseId" element={<ClassworkPage />} />
       <Route path="/edit-assignment/:assignmentId" element={<EditAssignmentPage />} />
       <Route path="/create-assignment/:courseId" element={<CreateAssignment />} />
+      <Route path="/course/:courseId" element={<PeoplePage />} />
       <Route path='/*' element={<h1>Not Found</h1>}/>
     </Routes>
     </BrowserRouter>

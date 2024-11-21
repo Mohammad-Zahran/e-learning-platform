@@ -1,0 +1,73 @@
+.people-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h2{
+    display: flex;
+    justify-content: start;
+  }
+  
+  .instructor-section,
+  .students-section {
+    margin-bottom: 30px;
+  }
+  
+  .instructor-card,
+  .student-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .instructor-info,
+  .student-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .instructor-info h3,
+  .student-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .instructor-info p,
+  .student-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .invite-section {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .invite-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .invite-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .students-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
