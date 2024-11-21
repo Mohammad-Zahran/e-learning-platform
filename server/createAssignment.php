@@ -55,7 +55,6 @@ if (isset($headers['Authorization'])) {
             exit();
         }
 
-        // Use the instructor_id from the decoded token
         $instructor_id = $decoded->id; // Assuming the instructor's ID is in the JWT payload
 
         $title = $data['title'];
@@ -63,7 +62,6 @@ if (isset($headers['Authorization'])) {
         $due_date = $data['due_date'];
         $course_id = $data['course_id'];
 
-        // Updated query with instructor_id
         $stmt = $connection->prepare("INSERT INTO assignments (title, description, due_date, course_id, instructor_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
         $stmt->bind_param("sssii", $title, $description, $due_date, $course_id, $instructor_id);
 

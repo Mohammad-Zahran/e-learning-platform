@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import "../../styles/CreateAssignment.css"
 
 const CreateAssignment = () => {
     const { courseId } = useParams();  // Get courseId from URL parameters
@@ -25,7 +26,7 @@ const CreateAssignment = () => {
             title,
             description,
             due_date: dueDate,
-            course_id: courseId,  // Use courseId from URL
+            course_id: courseId,  
         };
 
         try {
