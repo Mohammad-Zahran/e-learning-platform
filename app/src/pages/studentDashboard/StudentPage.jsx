@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/StudentPage.css'; 
+import '../../styles/StudentPage.css';
 
 const StudentPage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -17,10 +17,14 @@ const StudentPage = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setCourses(response.data.data);
-        setLoading(false);
+        if (response.data.status === 'success') {
+          setCourses(response.data.data);
+        } else {
+          setError(response.data.message || 'Failed to fetch courses.');
+        }
       } catch (err) {
-        setError('Failed to fetch courses');
+        setError(err.response?.data?.message || 'An error occurred while fetching courses.');
+      } finally {
         setLoading(false);
       }
     };
@@ -29,8 +33,35 @@ const StudentPage = () => {
   }, []);
 
   const handleCourseClick = (courseId) => {
-    navigate(`/course/${courseId}`); 
+    navigate(`/course/${courseId}`);
   };
+
+  const handleEnroll = async (courseId, event) => {
+    event.stopPropagation(); 
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/server/accept_invitation.php',
+        { course_id: courseId },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      alert(response.data.message);
+      if (response.data.status === 'success') {
+        setCourses((prevCourses) =>
+          prevCourses.map((course) =>
+            course.id === courseId ? { ...course, status: 'accepted' } : course
+          )
+        );
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to enroll in the course');
+    }
+  };
+  
+  
 
   if (loading) return <div className="loading">Loading courses...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -54,6 +85,15 @@ const StudentPage = () => {
                 <span>Created: {new Date(course.created_at).toLocaleDateString()}</span>
                 <span>Updated: {new Date(course.updated_at).toLocaleDateString()}</span>
               </div>
+              {course.status === 'pending' && (
+                <button
+                  className="enroll-btn"
+                  onClick={(event) => handleEnroll(course.id, event)}
+                >
+                  Enroll
+                </button>
+              )}
+              {course.status === 'accepted' && <span className="enrolled-badge">Enrolled</span>}
             </div>
           ))
         )}
