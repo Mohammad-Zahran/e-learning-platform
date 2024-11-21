@@ -13,6 +13,7 @@ const PeoplePage = () => {
     { name: "Charlie Brown", email: "charlie.brown@example.com" },
   ]);
   const [error, setError] = useState('');
+  const [inviteEmail, setInviteEmail] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -37,11 +38,39 @@ const PeoplePage = () => {
     } else {
       setError('Authorization token or course ID missing');
     }
-  }, [courseId]); 
+  }, [courseId]);
 
   const handleInvite = () => {
-    alert("Invite functionality coming soon!");
+    const token = localStorage.getItem('token');
+    if (!inviteEmail || !token) {
+      setError('Please enter a valid email and ensure you are logged in.');
+      return;
+    }
+
+    axios
+      .post(
+        'http://localhost/e-learning/server/send_invitation.php', 
+        { course_id: courseId, student_email: inviteEmail },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.status === 'success') {
+          alert('Invitation sent successfully!');
+          setInviteEmail(''); // Clear the input field after sending the invitation
+        } else {
+          setError(response.data.message || 'An error occurred while sending the invitation.');
+        }
+      })
+      .catch((err) => {
+        setError(err.response ? err.response.data.message : 'Error contacting the server.');
+      });
   };
+
+  
 
   return (
     <div className="people-page">
@@ -67,8 +96,15 @@ const PeoplePage = () => {
       <div className="students-section">
         <div className="invite-section">
           <h2>Students</h2>
+          <input
+            type="email"
+            value={inviteEmail}
+            onChange={(e) => setInviteEmail(e.target.value)}
+            placeholder="Enter student email"
+            className="invite-input"
+          />
           <button className="invite-button" onClick={handleInvite}>
-            <FaUserPlus /> Invite Students
+            <FaUserPlus /> Invite Student
           </button>
         </div>
 

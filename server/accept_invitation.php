@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-require 'vendor/autoload.php'; // JWT
+require 'vendor/autoload.php'; 
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
