@@ -20,7 +20,6 @@ if (isset($headers['Authorization'])) {
             exit();
         }
 
-        // Get `course_id` from query parameters
         if (!isset($_GET['course_id'])) {
             http_response_code(400);
             echo json_encode(["status" => "error", "message" => "Missing course_id parameter."]);
