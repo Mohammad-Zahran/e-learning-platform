@@ -1,59 +1,66 @@
 .student-page {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  .student-sidebar {
-    width: 250px;
-    background-color: #f8f9fa;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .student-sidebar h2 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    color: #343a40;
-  }
-  
-  .student-sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .student-sidebar ul li {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #495057;
-  }
-  
-  .student-sidebar ul li:hover {
-    color: #007bff;
-    text-decoration: underline;
-  }
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
 
-  .student-sidebar ul li.active {
-    color: #007bff;
-    font-weight: bold;
-  }
-  
-  
-  .student-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #ffffff;
-  }
-  
-  .student-content h1 {
-    margin-bottom: 10px;
-    font-size: 2rem;
-    color: #343a40;
-  }
-  
-  .student-content p {
-    font-size: 1.2rem;
-    color: #6c757d;
-  }
-  
+.student-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.courses-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.course-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #28a745; /* Green color to represent student-specific course enrollment */
+}
+
+.course-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.course-dates {
+  font-size: 14px;
+  color: #888;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  margin-top: 50px;
+}
+
+.loading {
+  color: #ffc107;
+}
+
+.error {
+  color: #dc3545;
+}
